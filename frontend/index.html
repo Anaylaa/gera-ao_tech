@@ -1,0 +1,838 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#3b171d">
+    <meta name="description" content="LibraTech: sistema de gerenciamento de biblioteca universitária.">
+
+    <title>LibraTech | Biblioteca Universitária</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div class="app-layout">
+
+        <!-- BARRA LATERAL -->
+        <aside class="sidebar" id="sidebar">
+
+            <div class="brand">
+                <div class="brand-icon">L</div>
+
+                <div>
+                    <h1>LibraTech</h1>
+                    <span>Biblioteca Universitária</span>
+                </div>
+            </div>
+
+            <div class="sidebar-label">MENU PRINCIPAL</div>
+
+            <nav class="navigation" aria-label="Menu principal">
+                <button class="nav-item active" data-page="dashboard" type="button">
+                    <span aria-hidden="true">⌂</span>
+                    Visão geral
+                </button>
+
+                <button class="nav-item" data-page="livros" type="button">
+                    <span aria-hidden="true">▤</span>
+                    Acervo
+                </button>
+
+                <button class="nav-item" data-page="leitores" type="button">
+                    <span aria-hidden="true">♙</span>
+                    Leitores
+                </button>
+
+                <button class="nav-item" data-page="emprestimos" type="button">
+                    <span aria-hidden="true">⇄</span>
+                    Empréstimos
+                </button>
+
+                <button class="nav-item" data-page="devolucoes" type="button">
+                    <span aria-hidden="true">↩</span>
+                    Devoluções
+                </button>
+
+                <button class="nav-item" data-page="multas" type="button">
+                    <span aria-hidden="true">◇</span>
+                    Multas
+                </button>
+
+                <button class="nav-item" data-page="relatorios" type="button">
+                    <span aria-hidden="true">▥</span>
+                    Relatórios
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="footer-decoration">✦</div>
+
+                <p>
+                    Conhecimento preservado, histórias compartilhadas.
+                </p>
+
+                <span>LIBRATECH © 2026</span>
+            </div>
+
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="main-content">
+
+            <!-- CABEÇALHO -->
+            <header class="topbar">
+
+                <button
+                    class="mobile-menu"
+                    id="mobileMenu"
+                    type="button"
+                    aria-label="Abrir menu"
+                    aria-controls="sidebar"
+                >
+                    ☰
+                </button>
+
+                <div>
+                    <span class="breadcrumb">Biblioteca /</span>
+                    <strong id="pageTitle">Visão geral</strong>
+                </div>
+
+                <div class="topbar-right">
+
+                    <span class="system-status">
+                        <span class="status-dot"></span>
+                        Sistema conectado
+                    </span>
+
+                    <div class="avatar" aria-label="LibraTech">LT</div>
+
+                </div>
+
+            </header>
+
+            <div class="content-wrapper">
+
+                <!-- DASHBOARD -->
+                <section class="page active" id="dashboard">
+
+                    <div class="hero">
+
+                        <div class="hero-content">
+
+                            <span class="eyebrow">
+                                BEM-VINDO À LIBRATECH
+                            </span>
+
+                            <h2>
+                                O conhecimento<br>
+                                é um legado.
+                            </h2>
+
+                            <p>
+                                Um espaço dedicado à organização,
+                                preservação e circulação do conhecimento.
+                            </p>
+
+                            <button
+                                class="primary-button"
+                                data-go="livros"
+                                type="button"
+                            >
+                                Explorar acervo →
+                            </button>
+
+                        </div>
+
+                        <div class="hero-image" aria-hidden="true"></div>
+
+                    </div>
+
+                    <div class="section-heading">
+
+                        <div>
+                            <span class="eyebrow">ACOMPANHAMENTO</span>
+                            <h2>Resumo da biblioteca</h2>
+                        </div>
+
+                        <button
+                            class="secondary-button"
+                            id="refreshDashboard"
+                            type="button"
+                        >
+                            ↻ Atualizar dados
+                        </button>
+
+                    </div>
+
+                    <div class="stats-grid">
+
+                        <article class="stat-card">
+                            <div class="stat-icon burgundy">▤</div>
+                            <span>Total de livros</span>
+                            <strong id="totalLivros">—</strong>
+                            <small>Exemplares cadastrados</small>
+                        </article>
+
+                        <article class="stat-card">
+                            <div class="stat-icon gold">♙</div>
+                            <span>Leitores</span>
+                            <strong id="totalLeitores">—</strong>
+                            <small>Usuários registrados</small>
+                        </article>
+
+                        <article class="stat-card">
+                            <div class="stat-icon green">⇄</div>
+                            <span>Empréstimos ativos</span>
+                            <strong id="totalAtivos">—</strong>
+                            <small>Em circulação</small>
+                        </article>
+
+                        <article class="stat-card">
+                            <div class="stat-icon red">◇</div>
+                            <span>Multas pendentes</span>
+                            <strong id="totalMultas">—</strong>
+                            <small id="valorMultas">R$ 0,00</small>
+                        </article>
+
+                    </div>
+
+                    <div class="dashboard-grid">
+
+                        <section class="panel">
+
+                            <div class="panel-heading">
+
+                                <div>
+                                    <span class="eyebrow">MOVIMENTAÇÃO</span>
+                                    <h3>Empréstimos recentes</h3>
+                                </div>
+
+                                <button
+                                    class="text-button"
+                                    data-go="emprestimos"
+                                    type="button"
+                                >
+                                    Ver todos →
+                                </button>
+
+                            </div>
+
+                            <div id="recentLoans" class="table-container">
+                                <p class="empty-state">
+                                    Carregando movimentações...
+                                </p>
+                            </div>
+
+                        </section>
+
+                        <section class="panel">
+
+                            <div class="panel-heading">
+                                <div>
+                                    <span class="eyebrow">ATENÇÃO</span>
+                                    <h3>Prazos de devolução</h3>
+                                </div>
+                            </div>
+
+                            <div id="upcomingLoans" class="upcoming-list">
+                                <p class="empty-state">
+                                    Carregando prazos...
+                                </p>
+                            </div>
+
+                        </section>
+
+                    </div>
+
+                </section>
+
+                <!-- LIVROS -->
+                <section class="page" id="livros">
+
+                    <div class="page-heading">
+
+                        <div>
+                            <span class="eyebrow">COLEÇÃO BIBLIOGRÁFICA</span>
+                            <h2>Acervo de livros</h2>
+                            <p>
+                                Gerencie e consulte os exemplares da biblioteca.
+                            </p>
+                        </div>
+
+                        <button
+                            class="primary-button"
+                            id="openBookModal"
+                            type="button"
+                        >
+                            + Cadastrar livro
+                        </button>
+
+                    </div>
+
+                    <div class="toolbar">
+
+                        <input
+                            type="search"
+                            id="searchBooks"
+                            placeholder="Buscar por título, autor ou ISBN..."
+                            aria-label="Buscar livros"
+                            autocomplete="off"
+                        >
+
+                        <select
+                            id="filterCategory"
+                            aria-label="Filtrar livros por categoria"
+                        >
+                            <option value="">Todas as categorias</option>
+                        </select>
+
+                    </div>
+
+                    <div id="booksGrid" class="books-grid">
+                        <p class="empty-state">Carregando acervo...</p>
+                    </div>
+
+                </section>
+
+                <!-- LEITORES -->
+                <section class="page" id="leitores">
+
+                    <div class="page-heading">
+
+                        <div>
+                            <span class="eyebrow">COMUNIDADE ACADÊMICA</span>
+                            <h2>Leitores cadastrados</h2>
+                            <p>
+                                Consulte os usuários registrados na biblioteca.
+                            </p>
+                        </div>
+
+                        <button
+                            class="primary-button"
+                            id="openReaderModal"
+                            type="button"
+                        >
+                            + Cadastrar leitor
+                        </button>
+
+                    </div>
+
+                    <div class="toolbar">
+
+                        <input
+                            type="search"
+                            id="searchReaders"
+                            placeholder="Buscar por nome ou e-mail..."
+                            aria-label="Buscar leitores"
+                            autocomplete="off"
+                        >
+
+                    </div>
+
+                    <section class="panel">
+
+                        <div id="readersTable" class="table-container">
+                            <p class="empty-state">Carregando leitores...</p>
+                        </div>
+
+                    </section>
+
+                </section>
+
+                <!-- EMPRÉSTIMOS -->
+                <section class="page" id="emprestimos">
+
+                    <div class="page-heading">
+
+                        <div>
+                            <span class="eyebrow">CIRCULAÇÃO</span>
+                            <h2>Empréstimos</h2>
+                            <p>Acompanhe os livros em circulação.</p>
+                        </div>
+
+                        <button
+                            class="primary-button"
+                            id="openLoanModal"
+                            type="button"
+                        >
+                            + Novo empréstimo
+                        </button>
+
+                    </div>
+
+                    <div class="toolbar">
+
+                        <input
+                            type="search"
+                            id="searchLoans"
+                            placeholder="Buscar por livro ou leitor..."
+                            aria-label="Buscar empréstimos"
+                            autocomplete="off"
+                        >
+
+                        <select
+                            id="filterLoanStatus"
+                            aria-label="Filtrar empréstimos por situação"
+                        >
+                            <option value="">Todos os empréstimos</option>
+                            <option value="ativo">Ativos</option>
+                            <option value="devolvido">Devolvidos</option>
+                        </select>
+
+                    </div>
+
+                    <section class="panel">
+
+                        <div id="loansTable" class="table-container">
+                            <p class="empty-state">
+                                Carregando empréstimos...
+                            </p>
+                        </div>
+
+                    </section>
+
+                </section>
+
+                <!-- DEVOLUÇÕES -->
+                <section class="page" id="devolucoes">
+
+                    <div class="page-heading">
+
+                        <div>
+                            <span class="eyebrow">RETORNO AO ACERVO</span>
+                            <h2>Devoluções</h2>
+                            <p>
+                                Registre a devolução dos exemplares emprestados.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <section class="panel">
+
+                        <div id="returnsTable" class="table-container">
+                            <p class="empty-state">
+                                Carregando empréstimos ativos...
+                            </p>
+                        </div>
+
+                    </section>
+
+                </section>
+
+                <!-- MULTAS -->
+                <section class="page" id="multas">
+
+                    <div class="page-heading">
+
+                        <div>
+                            <span class="eyebrow">CONTROLE FINANCEIRO</span>
+                            <h2>Multas</h2>
+                            <p>Acompanhe pendências e pagamentos.</p>
+                        </div>
+
+                    </div>
+
+                    <div class="stats-grid">
+
+                        <article class="stat-card">
+                            <span>Multas pendentes</span>
+                            <strong id="pendingFineCount">—</strong>
+                        </article>
+
+                        <article class="stat-card">
+                            <span>Valor pendente</span>
+                            <strong id="pendingFineValue">—</strong>
+                        </article>
+
+                        <article class="stat-card">
+                            <span>Multas pagas</span>
+                            <strong id="paidFineCount">—</strong>
+                        </article>
+
+                    </div>
+
+                    <section class="panel">
+
+                        <div id="finesTable" class="table-container">
+                            <p class="empty-state">Carregando multas...</p>
+                        </div>
+
+                    </section>
+
+                </section>
+
+                <!-- RELATÓRIOS -->
+                <section class="page" id="relatorios">
+
+                    <div class="page-heading">
+
+                        <div>
+                            <span class="eyebrow">ANÁLISE E INDICADORES</span>
+                            <h2>Relatórios</h2>
+                            <p>
+                                Indicadores gerais de funcionamento da biblioteca.
+                            </p>
+                        </div>
+
+                        <button
+                            class="secondary-button"
+                            id="exportReport"
+                            type="button"
+                        >
+                            ↓ Exportar CSV
+                        </button>
+
+                    </div>
+
+                    <div class="stats-grid">
+
+                        <article class="stat-card">
+                            <span>Livros disponíveis</span>
+                            <strong id="reportAvailable">—</strong>
+                        </article>
+
+                        <article class="stat-card">
+                            <span>Livros emprestados</span>
+                            <strong id="reportBorrowed">—</strong>
+                        </article>
+
+                        <article class="stat-card">
+                            <span>Empréstimos atrasados</span>
+                            <strong id="reportOverdue">—</strong>
+                        </article>
+
+                        <article class="stat-card">
+                            <span>Taxa de ocupação</span>
+                            <strong id="reportOccupancy">—</strong>
+                        </article>
+
+                    </div>
+
+                    <section class="panel">
+
+                        <div class="panel-heading">
+
+                            <div>
+                                <span class="eyebrow">DISTRIBUIÇÃO</span>
+                                <h3>Acervo por categoria</h3>
+                            </div>
+
+                        </div>
+
+                        <div id="categoryReport" class="category-report"></div>
+
+                    </section>
+
+                </section>
+
+            </div>
+
+            <!-- RODAPÉ -->
+            <footer class="main-footer">
+                <span>
+                    LibraTech — Sistema de Gerenciamento de Biblioteca
+                </span>
+
+                <span>Desenvolvido para fins acadêmicos</span>
+            </footer>
+
+        </main>
+
+    </div>
+
+    <!-- MODAL: CADASTRAR LIVRO -->
+    <div
+        class="modal-overlay"
+        id="bookModal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="bookModalTitle"
+    >
+
+        <div class="modal">
+
+            <div class="modal-heading">
+
+                <div>
+                    <span class="eyebrow">ACERVO</span>
+                    <h2 id="bookModalTitle">Novo livro</h2>
+                </div>
+
+                <button
+                    class="close-modal"
+                    data-close="bookModal"
+                    type="button"
+                    aria-label="Fechar modal"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <form id="bookForm">
+
+                <label for="bookTitle">Título</label>
+                <input
+                    id="bookTitle"
+                    name="titulo"
+                    type="text"
+                    required
+                    maxlength="200"
+                    autocomplete="off"
+                >
+
+                <label for="bookAuthor">Autor</label>
+                <input
+                    id="bookAuthor"
+                    name="autor"
+                    type="text"
+                    required
+                    maxlength="150"
+                    autocomplete="off"
+                >
+
+                <label for="bookISBN">ISBN</label>
+                <input
+                    id="bookISBN"
+                    name="isbn"
+                    type="text"
+                    required
+                    maxlength="20"
+                    autocomplete="off"
+                >
+
+                <label for="bookCategory">Categoria</label>
+                <select
+                    id="bookCategory"
+                    name="categoria"
+                    required
+                >
+                    <option value="">Selecione uma categoria</option>
+                </select>
+
+                <label for="bookQuantity">
+                    Quantidade de exemplares
+                </label>
+
+                <input
+                    id="bookQuantity"
+                    name="quantidade_total"
+                    type="number"
+                    min="1"
+                    value="1"
+                    required
+                >
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        data-close="bookModal"
+                    >
+                        Cancelar
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-button"
+                    >
+                        Cadastrar livro
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- MODAL: CADASTRAR LEITOR -->
+    <div
+        class="modal-overlay"
+        id="readerModal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="readerModalTitle"
+    >
+
+        <div class="modal">
+
+            <div class="modal-heading">
+
+                <div>
+                    <span class="eyebrow">COMUNIDADE</span>
+                    <h2 id="readerModalTitle">Novo leitor</h2>
+                </div>
+
+                <button
+                    class="close-modal"
+                    data-close="readerModal"
+                    type="button"
+                    aria-label="Fechar modal"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <form id="readerForm">
+
+                <label for="readerName">Nome completo</label>
+                <input
+                    id="readerName"
+                    name="nome"
+                    type="text"
+                    required
+                    maxlength="150"
+                    autocomplete="name"
+                >
+
+                <label for="readerEmail">E-mail</label>
+                <input
+                    id="readerEmail"
+                    name="email"
+                    type="email"
+                    required
+                    autocomplete="email"
+                >
+
+                <label for="readerPhone">Telefone</label>
+                <input
+                    id="readerPhone"
+                    name="telefone"
+                    type="tel"
+                    maxlength="20"
+                    autocomplete="tel"
+                >
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        data-close="readerModal"
+                    >
+                        Cancelar
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-button"
+                    >
+                        Cadastrar leitor
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- MODAL: NOVO EMPRÉSTIMO -->
+    <div
+        class="modal-overlay"
+        id="loanModal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="loanModalTitle"
+    >
+
+        <div class="modal">
+
+            <div class="modal-heading">
+
+                <div>
+                    <span class="eyebrow">CIRCULAÇÃO</span>
+                    <h2 id="loanModalTitle">Novo empréstimo</h2>
+                </div>
+
+                <button
+                    class="close-modal"
+                    data-close="loanModal"
+                    type="button"
+                    aria-label="Fechar modal"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <form id="loanForm">
+
+                <label for="loanBook">Livro</label>
+
+                <select
+                    id="loanBook"
+                    name="livro_id"
+                    required
+                >
+                    <option value="">Selecione um livro</option>
+                </select>
+
+                <label for="loanReader">Leitor</label>
+
+                <select
+                    id="loanReader"
+                    name="leitor_id"
+                    required
+                >
+                    <option value="">Selecione um leitor</option>
+                </select>
+
+                <p class="form-note">
+                    O prazo padrão de empréstimo é de 30 dias corridos.
+                </p>
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        data-close="loanModal"
+                    >
+                        Cancelar
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-button"
+                    >
+                        Confirmar empréstimo
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- NOTIFICAÇÕES -->
+    <div
+        id="toast"
+        class="toast"
+        role="status"
+        aria-live="polite"
+    ></div>
+
+    <!-- JAVASCRIPT -->
+    <script src="/static/script.js" defer></script>
+
+</body>
+</html>
