@@ -1,0 +1,25 @@
+﻿
+Etapa                             Status   Detalhe              
+-----                             ------   -------              
+Docker Engine                     APROVADO ExecuÃ§Ã£o concluÃ­da
+Containers do projeto             APROVADO ExecuÃ§Ã£o concluÃ­da
+Healthcheck da API                APROVADO ExecuÃ§Ã£o concluÃ­da
+Healthcheck PostgreSQL            APROVADO ExecuÃ§Ã£o concluÃ­da
+Testes automatizados Pytest       APROVADO ExecuÃ§Ã£o concluÃ­da
+AnÃ¡lise estÃ¡tica Ruff           APROVADO ExecuÃ§Ã£o concluÃ­da
+Estado das migrations             APROVADO ExecuÃ§Ã£o concluÃ­da
+ConsistÃªncia das migrations      APROVADO ExecuÃ§Ã£o concluÃ­da
+Cadastro de livro                 APROVADO ExecuÃ§Ã£o concluÃ­da
+Bloqueio de ISBN duplicado        APROVADO ExecuÃ§Ã£o concluÃ­da
+Cadastro de leitor                APROVADO ExecuÃ§Ã£o concluÃ­da
+Bloqueio de e-mail duplicado      APROVADO ExecuÃ§Ã£o concluÃ­da
+RealizaÃ§Ã£o de emprÃ©stimo       APROVADO ExecuÃ§Ã£o concluÃ­da
+Bloqueio por falta de estoque     APROVADO ExecuÃ§Ã£o concluÃ­da
+Cinco renovaÃ§Ãµes permitidas     APROVADO ExecuÃ§Ã£o concluÃ­da
+Bloqueio da sexta renovaÃ§Ã£o     APROVADO ExecuÃ§Ã£o concluÃ­da
+DevoluÃ§Ã£o do emprÃ©stimo        APROVADO ExecuÃ§Ã£o concluÃ­da
+Bloqueio de devoluÃ§Ã£o duplicada APROVADO ExecuÃ§Ã£o concluÃ­da
+Consulta dos registros            APROVADO ExecuÃ§Ã£o concluÃ­da
+
+
+
